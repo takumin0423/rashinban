@@ -19,11 +19,11 @@ Rashinban（羅針盤）は、技術学習の羅針盤となるようなサー�
 
 ## 重要な注意事項
 
-1. **開発時は`pnpm run dev`を使用**（Turbopackが有効化される）
-2. **コード品質チェックは`pnpm run precommit`で実行**（コード変更を行ったタスク完了前に必須）
-3. **Cloudflare環境変数の型定義は`pnpm run cf-typegen`で生成**
-4. **UIコンポーネントはshadcn/uiベースで構築**
-5. **npxを使わず、pnpm dlxを使う**
+1. **コード品質チェックは`pnpm run precommit`で実行**（コード変更を行ったタスク完了前に必須）
+2. **UIコンポーネントはshadcn/uiベースで構築**
+3. **npxを使わず、pnpm dlxを使う**
+4. **page.tsxやlayout.tsxはRSCのまま、イベントハンドラやReact Hooksが必要な部分だけクライアントコンポーネントとして切り出す**
+5. **データ取得はRSCで行い、必要に応じてクライアントコンポーネントとして切り出した子コンポーネントのPropsに渡す**
 
 ## 開発コマンド
 

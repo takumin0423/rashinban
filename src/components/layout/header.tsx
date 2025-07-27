@@ -1,15 +1,16 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { navigation, siteConfig } from "../../lib/constants";
+import { siteConfig } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 export function Header() {
 	const [isScrolled, setIsScrolled] = useState(false);
-	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -20,65 +21,90 @@ export function Header() {
 	}, []);
 
 	return (
-		<header
-			className={cn(
-				"fixed top-0 w-full z-50 transition-all duration-200",
-				isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-white",
-			)}
-		>
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex justify-between items-center h-16">
-					{/* Logo */}
-					<Link href="/" className="flex items-center">
-						<span className="text-xl font-bold">{siteConfig.name}</span>
-					</Link>
-
-					{/* Desktop Navigation */}
-					<nav className="hidden md:flex items-center space-x-8">
-						{navigation.main.map((item) => (
-							<Link
-								key={item.name}
-								href={item.href}
-								className="text-gray-700 hover:text-gray-900 transition-colors"
-							>
-								{item.name}
+		<header className="fixed top-4 left-4 right-4 z-50 transition-all duration-300">
+			<div className="mx-auto max-w-7xl">
+				<div
+					className={cn(
+						"rounded-2xl bg-background/80 backdrop-blur-md border shadow-lg transition-all duration-300",
+						isScrolled && "bg-background/95 shadow-xl",
+					)}
+				>
+					<div className="px-6 py-4">
+						<nav
+							className="flex items-center justify-between"
+							aria-label="メインナビゲーション"
+						>
+							{/* モダンロゴセクション */}
+							<Link href="/" className="flex items-center space-x-2 group">
+								<div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+									<span className="text-primary font-bold">R</span>
+								</div>
+								<span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+									{siteConfig.name}
+								</span>
 							</Link>
-						))}
-						<Button size="sm">始める</Button>
-					</nav>
 
-					{/* Mobile menu button */}
-					<button
-						type="button"
-						className="md:hidden p-2"
-						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-						aria-label="メニューを開く"
-					>
-						{isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-					</button>
+							{/* デスクトップナビゲーション */}
+							<div className="hidden md:flex items-center space-x-2">
+								<Button variant="ghost" className="rounded-xl">
+									記事一覧
+								</Button>
+								<Separator orientation="vertical" className="h-6" />
+								<Button variant="outline" className="rounded-xl">
+									ログイン
+								</Button>
+								<Button className="rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
+									始める
+								</Button>
+							</div>
+
+							{/* モバイルメニュー */}
+							<Sheet>
+								<SheetTrigger asChild>
+									<Button
+										variant="ghost"
+										size="icon"
+										className="md:hidden rounded-xl"
+									>
+										<Menu className="h-5 w-5" />
+										<span className="sr-only">メニューを開く</span>
+									</Button>
+								</SheetTrigger>
+								<SheetContent className="rounded-l-2xl">
+									<div className="flex flex-col space-y-6 mt-8">
+										<div className="flex items-center space-x-2">
+											<div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
+												<span className="text-primary font-bold">R</span>
+											</div>
+											<span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+												{siteConfig.name}
+											</span>
+										</div>
+										<Separator />
+										<div className="flex flex-col space-y-4">
+											<Button
+												variant="ghost"
+												className="rounded-xl justify-start"
+											>
+												記事一覧
+											</Button>
+											<Button
+												variant="outline"
+												className="rounded-xl justify-start"
+											>
+												ログイン
+											</Button>
+											<Button className="rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
+												始める
+											</Button>
+										</div>
+									</div>
+								</SheetContent>
+							</Sheet>
+						</nav>
+					</div>
 				</div>
 			</div>
-
-			{/* Mobile Navigation */}
-			{isMobileMenuOpen && (
-				<div className="md:hidden bg-white border-t">
-					<nav className="px-4 py-4 space-y-4">
-						{navigation.main.map((item) => (
-							<Link
-								key={item.name}
-								href={item.href}
-								className="block py-2 text-gray-700 hover:text-gray-900 transition-colors"
-								onClick={() => setIsMobileMenuOpen(false)}
-							>
-								{item.name}
-							</Link>
-						))}
-						<Button className="w-full" size="sm">
-							始める
-						</Button>
-					</nav>
-				</div>
-			)}
 		</header>
 	);
 }

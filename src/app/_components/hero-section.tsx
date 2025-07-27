@@ -1,5 +1,4 @@
-import { ArrowRight, Compass } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Compass } from "lucide-react";
 import { siteConfig } from "../../lib/constants";
 
 export function HeroSection() {
@@ -29,17 +28,6 @@ export function HeroSection() {
 					<p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
 						{siteConfig.tagline}
 					</p>
-
-					{/* CTA buttons */}
-					<div className="flex flex-col sm:flex-row gap-4 justify-center">
-						<Button size="lg" className="group">
-							無料で始める
-							<ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-						</Button>
-						<Button size="lg" variant="outline">
-							デモを見る
-						</Button>
-					</div>
 				</div>
 			</div>
 		</section>
