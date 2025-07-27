@@ -6,7 +6,6 @@
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
 		"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
 		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
@@ -25,5 +24,6 @@
 		"tailwindcss": "^4",
 		"typescript": "^5",
 		"wrangler": "^4.26.0"
-	}
+	},
+	"packageManager": "pnpm@10.13.1"
 }
